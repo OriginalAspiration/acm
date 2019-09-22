@@ -11,7 +11,7 @@ package edu.hubu.acm.InterviewAndPractice;
 import java.util.Scanner;
 
 public class Demo03 {
-    public void bonusDistribution() {
+    public static void bonusDistribution() {
         Scanner scanner = new Scanner(System.in);
 //		样例个数
         int exam_num = 1;

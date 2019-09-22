@@ -559,4 +559,69 @@ class RelationEntry {
         }
         return maxSum;
     }
+
+    public static int miniCookie(int[] scores) {
+        if (scores == null || scores.length == 0) {
+            return 0;
+        }
+        int[] count = new int[scores.length];
+        //每个孩子都至少有一块饼干
+        Arrays.fill(count, 1);
+        int sum = 0;
+        for (int i = 1; i < scores.length; i++) {
+            if (scores[i] > scores[i - 1]) {
+                count[i] = count[i - 1] + 1;
+            }
+        }
+
+        for (int i = scores.length - 1; i > 0; i--) {
+            sum += count[i];
+            if (scores[i] < scores[i - 1] && count[i] >= count[i - 1]) {
+                count[i - 1] = count[i] + 1;
+            }
+        }
+        sum += count[0];
+        return sum;
+    }
+
+    public static void solution(){
+        Scanner input=new Scanner(System.in);
+        String str=input.nextLine();
+        int[] results=new int[str.length()];//存放每个机器人最后存放位置
+        for(int i=0;i<str.length();i++){
+            if(str.charAt(i)=='L'){
+                for(int j=i-1;j>=0;j--){
+                    if(str.charAt(j)=='R'){
+                        if((i-j)%2==0){
+                            results[j]++;
+                        }else{
+                            results[j+1]++;
+                        }
+                        break;
+                    }
+
+                }
+            }
+            else{
+                for(int j=i+1;j<str.length();j++){
+                    if(str.charAt(j)=='L'){
+                        if((j-i)%2==0){
+                            results[j]++;
+                        }else{
+                            results[j-1]++;
+                        }
+                        break;
+                    }
+
+                }
+            }
+        }
+        for(int i=0;i<str.length();i++){
+            System.out.print(results[i]+" ");
+        }
+    }
+
+
 }
+
+
