@@ -621,6 +621,32 @@ class RelationEntry {
         }
     }
 
+    /**
+     * @Description:招行笔试题找出某个范围内各位乘积最大的一个数
+     * @Param: []
+     * @return: void
+     * @Author: zhoulei
+     * @Date: 2019/9/23
+     */
+    public static void multiplyMax() {
+        Scanner in = new Scanner(System.in);
+        Integer num = in.nextInt();
+        Integer multiply_max = Integer.MIN_VALUE;
+        for (int i = 1; i <= num; ++i) {
+            int tmpMax = 1;
+            int j = i;
+            int tmpValue;
+            while (j != 0) {
+                tmpValue = j % 10;
+                tmpMax *= tmpValue;
+                j = j / 10;
+            }
+            multiply_max = tmpMax > multiply_max ? tmpMax : multiply_max;
+        }
+        System.out.println(multiply_max);
+
+    }
+
 
 }
 
