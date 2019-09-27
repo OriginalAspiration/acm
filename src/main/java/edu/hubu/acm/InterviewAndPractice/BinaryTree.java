@@ -8,7 +8,7 @@ package edu.hubu.acm.InterviewAndPractice;
  * @createTime 2019年09月12日 17:02:00
  */
 public class BinaryTree {
-    class TreeNode {
+    public static class TreeNode {
         int val;
         TreeNode left;
         TreeNode right;
@@ -18,13 +18,13 @@ public class BinaryTree {
         }
     }
 
-    class ReConstructBinaryTree {
-        public TreeNode reConstructBinaryTree(int[] in, int[] last) {
+    public static class ReConstructBinaryTree {
+        public static TreeNode reConstructBinaryTree(int[] in, int[] last) {
             TreeNode root = postAndInConstructBinaryTree(in, 0, in.length - 1, last, 0, last.length - 1);
             return root;
         }
 
-        public TreeNode preAndInConstructBinaryTree(int[] pre, int pStart, int pEnd, int[] in, int iStart, int iEnd) {
+        public static TreeNode preAndInConstructBinaryTree(int[] pre, int pStart, int pEnd, int[] in, int iStart, int iEnd) {
             if (pStart > pEnd || iStart > iEnd) {
                 return null;
             }
@@ -35,7 +35,7 @@ public class BinaryTree {
             return root;
         }
 
-        public int findTargetIndex(int[] in, int target, int start, int end) {
+        public static int findTargetIndex(int[] in, int target, int start, int end) {
             for (int i = start; i <= end; ++i) {
                 if (in[i] == target) {
                     return i;
@@ -44,7 +44,7 @@ public class BinaryTree {
             return -1;
         }
 
-        public TreeNode postAndInConstructBinaryTree(int[] in, int inStart, int inEnd, int[] last, int lastStart, int lastEnd) {
+        public static TreeNode postAndInConstructBinaryTree(int[] in, int inStart, int inEnd, int[] last, int lastStart, int lastEnd) {
             if (inStart > inEnd || lastStart > lastEnd)
                 return null;
             TreeNode treeNode = new TreeNode(last[lastEnd]);
@@ -58,8 +58,8 @@ public class BinaryTree {
         }
     }
 
-    class BinaryTreeVisit {
-        public void preVisit(TreeNode root) {
+    public static class BinaryTreeVisit {
+        public static void preVisit(TreeNode root) {
             if (root == null) {
                 return;
             } else {
@@ -69,7 +69,7 @@ public class BinaryTree {
             }
         }
 
-        public void inVisit(TreeNode root) {
+        public static void inVisit(TreeNode root) {
             if (root == null) {
                 return;
             } else {
@@ -79,7 +79,7 @@ public class BinaryTree {
             }
         }
 
-        public void lastVisit(TreeNode root) {
+        public static void lastVisit(TreeNode root) {
             if (root == null) {
                 return;
             } else {

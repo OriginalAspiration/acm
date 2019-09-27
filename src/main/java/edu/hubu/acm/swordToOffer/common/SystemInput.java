@@ -23,24 +23,4 @@ public class SystemInput {
         System.out.println("The numbers were:"+arr.toString());
     }
 
-//    public static int SumContinuousSequence(int target) {
-//        int n = target;
-//        if (n<3) {
-//            return 0;
-//        }
-//        int count = 1;
-//        for (int i = 2; (2 * i - 1) * (2 * i - 1) - 1 < 8 * n; i++) {//将求根转化为平方。例如 i<sqrt(x)-->i*i<n
-//            if ((n - i * (i - 1) / 2) % i == 0) {
-//                int x = (n - i * (i - 1) / 2) / i;
-//                int j = 0;
-//                while (j < i) {
-//                    x++;
-//                    j++;
-//                }
-//                ++count;
-//            }
-//        }
-//        return count;
-//    }
-
 }
