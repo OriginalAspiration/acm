@@ -41,6 +41,7 @@ public class Sort {
             return low;
         }
     }
+
     //堆排的时间复杂度为O(nlogn)，且为不稳定的排序算法
     public static class HeapSort {
         //调整某棵子树使其满足堆的定义
@@ -84,6 +85,7 @@ public class Sort {
             return array;
         }
     }
+
     //归并排序的时间复杂度为O(nlogn),且为稳定的排序算法
     public static class MergeSort {
         public static void mergeSort(int[] a, int left, int right) {
@@ -125,6 +127,30 @@ public class Sort {
         }
     }
 
+    public static class BubbleSort {
+        public static void bubbleSort(int[] array) {
+            System.out.println("排序之前：");
+            for (int i = 0; i < array.length; i++) {
+                System.out.print(array[i] + " ");
+            }
+            //冒泡排序
+            for (int i = 0; i < array.length - 1; i++) {
+                for (int j = 0; j < array.length - i - 1; j++) {
+                    if (array[j] > array[j + 1]) {
+                        int temp = array[j];
+                        array[j] = array[j + 1];
+                        array[j + 1] = temp;
+                    }
+                }
+            }
+            System.out.println();
+            System.out.println("排序之后：");
+            for (int i = 0; i < array.length; i++) {
+                System.out.print(array[i] + " ");
+            }
+
+        }
+    }
 
 }
 

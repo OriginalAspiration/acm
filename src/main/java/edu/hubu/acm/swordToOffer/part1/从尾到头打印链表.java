@@ -1,6 +1,6 @@
 package edu.hubu.acm.swordToOffer.part1;
 
-import edu.hubu.acm.swordToOffer.common.LinkNode;
+import edu.hubu.acm.common.LinkNode;
 
 import java.util.Scanner;
 

@@ -1,4 +1,4 @@
-package edu.hubu.acm.InterviewAndPractice;
+package edu.hubu.acm.common;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -19,6 +19,13 @@ public class ConsoleInput {
         scan.close();
     }
 
+    /**
+     * @Description:当我们使用nextInt()从控制台输入一行数据时，无法用Enter回车符结束输入，解决办法如下
+     * @Param: []
+     * @return: void
+     * @Author: zhoulei
+     * @Date: 2019/9/29
+     */
     public static void inputIntegerWithoutLength() {
         Scanner scanner = new Scanner(System.in);
         String line = scanner.nextLine();

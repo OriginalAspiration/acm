@@ -1,4 +1,4 @@
-package edu.hubu.acm.swordToOffer.common;
+package edu.hubu.acm.common;
 
 /**
  * @author zhoulei

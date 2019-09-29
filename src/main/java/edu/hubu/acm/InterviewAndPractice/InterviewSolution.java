@@ -22,6 +22,10 @@ public class InterviewSolution {
                 break;
             }
         }
+        if (middleIndex == array.length) {
+            System.out.println("序列中不存在两项之和等于" + key + "的数");
+            return;
+        }
         for (int i = 0; i < middleIndex; ++i) {
             for (int j = middleIndex; j < array.length; ++j) {
                 if (array[i] + array[j] == key) {
@@ -90,7 +94,7 @@ public class InterviewSolution {
         }
     }
 
-    //    腾讯笔试题——一排并列的楼栋在每个位置能看到的楼栋数量
+    //腾讯笔试题——一排并列的楼栋在每个位置能看到的楼栋数量
     public int[] numberOfBuildingSeen(int[] buildingHeight) {
         int[] buildingSeen = new int[buildingHeight.length];
         int length = buildingHeight.length;
@@ -382,132 +386,16 @@ public class InterviewSolution {
     }
 
     /**
-     * @Description:携程笔试题，以某一数字为分隔，比起大的放在后面，否则放在前面
-     * @Param: [head, m] 
-     * @return: edu.hubu.acm.InterviewAndPractice.ListNode
+     * @Description:B站笔试题——求和等于整数target的连续序列都多少个
+     * @Param: [target]
+     * @return: int
      * @Author: zhoulei
-     * @Date: 2019/9/4 
+     * @Date: 2019/9/10
      */
-    /**
-     * @Description:携程笔试题，以某一数字为分隔，比起大的放在后面，否则放在前面
-     * @Param: [head, m] 
-     * @return: edu.hubu.acm.InterviewAndPractice.ListNode
-     * @Author: zhoulei
-     * @Date: 2019/9/4 
-     */
-    public static class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode(int x) {
-            val = x;
-            next = null;
-        }
-    }
-    static ListNode partition(ListNode head, int m) {
-        List<Integer> lowerList = new ArrayList<>();
-        List<Integer> uperList = new ArrayList<>();
-        ListNode tailNode=head;
-        while (tailNode != null) {
-            if (tailNode.val <= m) {
-                lowerList.add(tailNode.val);
-            } else {
-                uperList.add(tailNode.val);
-            }
-            tailNode = tailNode.next;
-        }
-        if (lowerList.size() > 0) {
-            head= new ListNode(lowerList.get(0));
-            tailNode=head;
-            int lowerSize = lowerList.size();
-            for (int i = 1; i < lowerSize; ++i) {
-                tailNode.next = new ListNode(lowerList.get(i));
-                tailNode = tailNode.next;
-            }
-            int uperSize = uperList.size();
-            for (int i = 0; i < uperSize; ++i) {
-                tailNode.next = new ListNode(lowerList.get(i));
-                tailNode = tailNode.next;
-            }
-            return head;
-        }
-        else {
-            return head;
-        }
-    }
-}
-
-//搜狗笔试题——关联Map
-class RelationMap {
-    private int N = 0;
-    private List<RelationEntry> rationMap = new ArrayList<>();
-    public void insert(String key, Integer value) {
-        RelationEntry relationEntry = new RelationEntry();
-        relationEntry.setKey(key);
-        relationEntry.setValue(value);
-        int size = rationMap.size();
-        int i = 0;
-        for (; i < size; ++i) {
-            if (rationMap.get(i).getKey() == key && rationMap.get(i).getValue() < value) {
-                for (int j = i; j < size - 1; ++j) {
-                    rationMap.set(j, rationMap.get(j + 1));
-                }
-                rationMap.set(size - 1, relationEntry);
-                return;
-            }
-        }
-        if (i == size) {
-            if (size < N) {
-                rationMap.add(relationEntry);
-            } else {
-                System.out.println(rationMap.get(0).getKey() + " " + rationMap.get(0).getValue());
-                for (int k = 0; k < size - 1; ++k) {
-                    rationMap.set(k, rationMap.get(k + 1));
-                }
-                rationMap.set(size - 1, relationEntry);
-            }
-        }
-    }
-
-    public int getN() {
-        return N;
-    }
-
-    public void setN(int n) {
-        N = n;
-    }
-}
-
-class RelationEntry {
-    private String key;
-    private Integer value;
-
-    public String getKey() {
-        return key;
-    }
-
-    public void setKey(String key) {
-        this.key = key;
-    }
-
-    public Integer getValue() {
-        return value;
-    }
-
-    public void setValue(Integer value) {
-        this.value = value;
-    }
-    /** 
-    * @Description:B站笔试题——求和等于整数target的连续序列都多少个
-    * @Param: [target]
-    * @return: int 
-    * @Author: zhoulei 
-    * @Date: 2019/9/10 
-    */ 
     public static int SumContinuousSequence(int target) {
         int n = target;
         int count = 1;
-        if (n<3) {
+        if (n < 3) {
             return count;
         }
         for (int i = 2; (2 * i - 1) * (2 * i - 1) - 1 < 8 * n; i++) {//将求根转化为平方。例如 i<sqrt(x)-->i*i<n
@@ -584,31 +472,30 @@ class RelationEntry {
         return sum;
     }
 
-    public static void solution(){
-        Scanner input=new Scanner(System.in);
-        String str=input.nextLine();
-        int[] results=new int[str.length()];//存放每个机器人最后存放位置
-        for(int i=0;i<str.length();i++){
-            if(str.charAt(i)=='L'){
-                for(int j=i-1;j>=0;j--){
-                    if(str.charAt(j)=='R'){
-                        if((i-j)%2==0){
+    public static void solution() {
+        Scanner input = new Scanner(System.in);
+        String str = input.nextLine();
+        int[] results = new int[str.length()];//存放每个机器人最后存放位置
+        for (int i = 0; i < str.length(); i++) {
+            if (str.charAt(i) == 'L') {
+                for (int j = i - 1; j >= 0; j--) {
+                    if (str.charAt(j) == 'R') {
+                        if ((i - j) % 2 == 0) {
                             results[j]++;
-                        }else{
-                            results[j+1]++;
+                        } else {
+                            results[j + 1]++;
                         }
                         break;
                     }
 
                 }
-            }
-            else{
-                for(int j=i+1;j<str.length();j++){
-                    if(str.charAt(j)=='L'){
-                        if((j-i)%2==0){
+            } else {
+                for (int j = i + 1; j < str.length(); j++) {
+                    if (str.charAt(j) == 'L') {
+                        if ((j - i) % 2 == 0) {
                             results[j]++;
-                        }else{
-                            results[j-1]++;
+                        } else {
+                            results[j - 1]++;
                         }
                         break;
                     }
@@ -616,8 +503,8 @@ class RelationEntry {
                 }
             }
         }
-        for(int i=0;i<str.length();i++){
-            System.out.print(results[i]+" ");
+        for (int i = 0; i < str.length(); i++) {
+            System.out.print(results[i] + " ");
         }
     }
 
@@ -647,7 +534,36 @@ class RelationEntry {
 
     }
 
+    public static int numIslands(int[][] grid) {
+        // Write your code here
+        int m = grid.length;
+        if (m == 0)
+            return 0;
+        int count = 0;
+        int n = grid[0].length;
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (grid[i][j] == 1) {
+                    dfs(grid, i, j);
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
 
+    public static void dfs(int[][] grid, int i, int j) {
+        if (i < 0 || j < 0 || i >= grid.length || j >= grid[0].length)
+            return;
+        if (grid[i][j] == 1) {
+            grid[i][j] = 0;
+            dfs(grid, i - 1, j);
+            dfs(grid, i + 1, j);
+            dfs(grid, i, j - 1);
+            dfs(grid, i, j + 1);
+        }
+
+    }
 }
 
 

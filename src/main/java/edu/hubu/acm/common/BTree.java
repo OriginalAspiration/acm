@@ -1,4 +1,4 @@
-package edu.hubu.acm.swordToOffer.common;
+package edu.hubu.acm.common;
 
 /**
  * @author zhoulei
@@ -53,7 +53,7 @@ public class BTree {
      */
     public BTree(Object array[]) {
         this.array = array;
-        root = build(1);
+        root = build(0);
     }
 
     /**
@@ -65,11 +65,11 @@ public class BTree {
     public BTreeNode build(int i) {
         int n = array.length;
 
-        if (i <= n) {//i在数组内，说明可以构造一个以array[i]为根节点的子树
+        if (i <n) {//i在数组内，说明可以构造一个以array[i]为根节点的子树
             BTreeNode treeNode = new BTreeNode();
-            treeNode.setData(array[i - 1]);//设置根节点
-            treeNode.setLchild(build(2 * i));//构造左子树
-            treeNode.setRchild(build(2 * i + 1));//构造右子树
+            treeNode.setData(array[i]);//设置根节点
+            treeNode.setLchild(build(2 * i+1));//构造左子树
+            treeNode.setRchild(build(2 * i + 2));//构造右子树
             return treeNode;
         } else {
             return null;
