@@ -1,5 +1,7 @@
 package edu.hubu.acm.common;
 
+import java.util.*;
+
 /**
  * @author zhoulei
  * @version 1.0.0
@@ -65,10 +67,10 @@ public class BTree {
     public BTreeNode build(int i) {
         int n = array.length;
 
-        if (i <n) {//i在数组内，说明可以构造一个以array[i]为根节点的子树
+        if (i < n) {//i在数组内，说明可以构造一个以array[i]为根节点的子树
             BTreeNode treeNode = new BTreeNode();
             treeNode.setData(array[i]);//设置根节点
-            treeNode.setLchild(build(2 * i+1));//构造左子树
+            treeNode.setLchild(build(2 * i + 1));//构造左子树
             treeNode.setRchild(build(2 * i + 2));//构造右子树
             return treeNode;
         } else {
@@ -192,10 +194,73 @@ public class BTree {
         }
     }
 
+    /**
+     * @Description:给予一颗二叉树，和两个节点的值，判断这两个节点是否是堂兄弟，即在同一层，但父节点不同。
+     * @Param: [root, x, y]
+     * @return: boolean
+     * @Author: zhoulei
+     * @Date: 2019/10/13
+     */
+    public boolean judgeCousins(int x, int y) {
+        if (root == null) {
+            return false;
+        }
+        Queue<BTreeNode> queue = new ArrayDeque<>();
+        Map<Object, BTreeNode> parentMap = new HashMap<>();
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            List<Object> currentLayerList = new ArrayList<>();
+            for (int i = 0; i < size; ++i) {
+                BTreeNode node = queue.remove();
+                currentLayerList.add(node.data);
+                if (node.lchild != null) {
+                    queue.add(node.lchild);
+                    parentMap.put(node.lchild.data, node);
+                }
+                if (node.rchild != null) {
+                    queue.add(node.rchild);
+                    parentMap.put(node.rchild.data, node);
+                }
+            }
+            if (currentLayerList.containsAll(Arrays.asList(x, y)) && parentMap.get(x) != parentMap.get(y)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public List<Double> averageOfLevels() {
+        List<Double> resultList = new ArrayList<>();
+        if (root == null) {
+            return resultList;
+        }
+        Queue<BTreeNode> queue = new ArrayDeque<>();
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            double sum = 0;
+            for (int i = 0; i < size; ++i) {
+                BTreeNode node = queue.remove();
+                sum += Double.valueOf(node.data.toString());
+                if (node.lchild != null) {
+                    queue.add(node.lchild);
+                }
+                if (node.rchild != null) {
+                    queue.add(node.rchild);
+                }
+            }
+            resultList.add(sum / size);
+        }
+        return resultList;
+
+    }
+
     public static void test() {
         Visit visit = new Visit();
         Character array_ch[] = new Character[]{'-', '*', 'c', 'a', 'b'};
-        BTree tree = new BTree(array_ch);
+        Object[] data = {1, 2, 3, 4,5,6,7,8,9,10,11,12,13,14};
+        BTree tree = new BTree(data);
         //前序、中序和后序遍历
         tree.preOrder();
         visit.printLine();
@@ -206,6 +271,8 @@ public class BTree {
         //获取节点数和树的深度
         System.out.println(tree.getNodeNum());
         System.out.println(tree.getDep());
+        System.out.println(tree.judgeCousins(12,14));
+        System.out.print("averageOfLevels is:"+tree.averageOfLevels().toString());
     }
 
 }
